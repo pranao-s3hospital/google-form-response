@@ -14,16 +14,18 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 's3-hospitals-app' title`, () => {
+  it(`should have the 'google-form-response-app' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('s3-hospitals-app');
+    expect(app.title).toEqual('google-form-response-app');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, s3-hospitals-app');
+    expect(compiled.querySelector('h1')?.textContent).toContain(
+      'Hello, google-form-response-app'
+    );
   });
 });

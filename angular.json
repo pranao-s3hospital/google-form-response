@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "s3-hospitals-app": {
+    "google-form-response-app": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/s3-hospitals-app",
+            "outputPath": "dist/google-form-response",
+            "baseHref": "/google-form-response/",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -63,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "s3-hospitals-app:build:production"
+              "buildTarget": "google-form-response-app:build:production"
             },
             "development": {
-              "buildTarget": "s3-hospitals-app:build:development"
+              "buildTarget": "google-form-response-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -91,9 +92,6 @@
             ],
             "scripts": []
           }
-        },
-        "deploy": {
-          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }

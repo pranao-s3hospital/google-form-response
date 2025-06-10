@@ -14,7 +14,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 export class AppComponent {
   constructor(private http: HttpClient) {}
 
-  title = 's3-hospitals-app';
+  title = 'google-form-response-app';
   selectedRange = 'all';
   showCustomDates = false;
   minDate = '2010-01-01';
