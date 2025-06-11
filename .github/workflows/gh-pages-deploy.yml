@@ -27,7 +27,7 @@ jobs:
             production: true,
             apiUsername: '${{ secrets.APP_USER_NAME }}',
             apiPassword: '${{ secrets.APP_USER_PASSWORD }}'
-          };" > src/environments/environment.prod.ts
+          };" > src/environments/environment.ts
 
       - name: Build Angular App
         run: npm run build
