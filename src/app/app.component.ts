@@ -43,7 +43,11 @@ export class AppComponent {
       return;
     }
     const payload = this.showCustomDates
-      ? { fromDate: this.fromDate, toDate: this.toDate }
+      ? {
+          fromDate: this.fromDate,
+          toDate: this.toDate,
+          selectValue: this.selectedRange,
+        }
       : { selectValue: this.selectedRange };
     const basicAuth =
       'Basic ' +
