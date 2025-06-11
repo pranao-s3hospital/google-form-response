@@ -1,10 +1,27 @@
 <div class="container">
   <app-header></app-header>
-  <div class="container mt-4">
+
+  <!-- Passcode screen -->
+  <div *ngIf="!passcodeEntered" class="mt-5 text-center passcode-overlay">
+    <h4>Please enter the passcode to continue</h4>
+    <input
+      type="password"
+      class="form-control w-50 mx-auto mt-3"
+      placeholder="Enter passcode"
+      [(ngModel)]="passcode"
+      (keyup.enter)="checkPasscode()"
+    />
+    <button class="btn btn-primary mt-3" (click)="checkPasscode()">
+      Submit
+    </button>
+  </div>
+
+  <!-- Main app content -->
+  <div *ngIf="passcodeEntered" class="container mt-4">
     <div class="container mt-4">
-      <label for="dateRange" class="form-label custom-label"
-        >Select date range for response</label
-      >
+      <label for="dateRange" class="form-label custom-label">
+        Select date range for response
+      </label>
       <select
         class="form-select custom-select"
         id="dateRange"
@@ -51,9 +68,35 @@
       </div>
     </div>
   </div>
+
+  <!-- Loading spinner -->
   <div *ngIf="loading" class="loading-overlay">
     <div class="spinner-border text-primary" role="status">
       <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Toasts -->
+  <div
+    class="toast-container position-fixed top-0 end-0 p-3"
+    style="z-index: 9999"
+  >
+    <div
+      *ngIf="toastVisible"
+      class="toast align-items-center text-bg-{{ toastType }} border-0 show"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      <div class="d-flex">
+        <div class="toast-body">{{ toastMessage }}</div>
+        <button
+          type="button"
+          class="btn-close btn-close-white me-2 m-auto"
+          (click)="toastVisible = false"
+          aria-label="Close"
+        ></button>
+      </div>
     </div>
   </div>
 </div>

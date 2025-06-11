@@ -27,6 +27,34 @@ export class AppComponent {
   fromDate: string = '';
   toDate: string = '';
   loading: boolean = false;
+  toastVisible = false;
+  toastMessage = '';
+  toastType: 'success' | 'danger' | 'info' | 'warning' = 'success';
+  passcodeEntered = false;
+  passcode = '';
+  expectedPasscode = 's3@2024';
+
+  checkPasscode() {
+    if (this.passcode === this.expectedPasscode) {
+      this.passcodeEntered = true;
+    } else {
+      this.showToast('Incorrect passcode. Please try again.', 'danger');
+      this.passcode = '';
+    }
+  }
+
+  showToast(
+    message: string,
+    type: 'success' | 'danger' | 'info' | 'warning' = 'success'
+  ) {
+    this.toastMessage = message;
+    this.toastType = type;
+    this.toastVisible = true;
+
+    setTimeout(() => {
+      this.toastVisible = false;
+    }, 3000); // Auto-hide after 3 seconds
+  }
 
   validateDates() {
     if (this.fromDate && this.toDate && this.fromDate > this.toDate) {
@@ -78,11 +106,11 @@ export class AppComponent {
           a.click();
           window.URL.revokeObjectURL(url);
 
-          alert('Download Successful!');
+          this.showToast('Download Successful!', 'success');
         },
         error: (err) => {
           this.loading = false;
-          alert(`Error: ${err.message}`);
+          this.showToast(`Download failed: ${err.message}`, 'danger');
         },
       });
   }
