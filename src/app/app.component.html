@@ -2,18 +2,14 @@
   <app-header></app-header>
 
   <!-- Passcode screen -->
-  <div *ngIf="!passcodeEntered" class="mt-5 text-center passcode-overlay">
-    <h4>Please enter the passcode to continue</h4>
+  <div *ngIf="!passcodeEntered" class="mt-5 text-center custom-input">
     <input
       type="password"
       class="form-control w-50 mx-auto mt-3"
       placeholder="Enter passcode"
       [(ngModel)]="passcode"
-      (keyup.enter)="checkPasscode()"
+      (onkeyup)="checkPasscode()"
     />
-    <button class="btn btn-primary mt-3" (click)="checkPasscode()">
-      Submit
-    </button>
   </div>
 
   <!-- Main app content -->
@@ -23,7 +19,7 @@
         Select date range for response
       </label>
       <select
-        class="form-select custom-select"
+        class="form-select custom-input"
         id="dateRange"
         (change)="handleDateRangeChange($event)"
       >
@@ -39,7 +35,7 @@
         <label for="fromDate" class="form-label custom-label">From</label>
         <input
           type="date"
-          class="form-control custom-date"
+          class="form-control custom-input"
           id="fromDate"
           onkeydown="return false"
           [min]="minDate"

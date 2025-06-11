@@ -4,11 +4,7 @@
   color: #b74592;
 }
 
-.custom-select {
-  width: 200px;
-}
-
-.custom-date {
+.custom-input {
   width: 200px;
 }
 
@@ -23,12 +19,4 @@
   justify-content: center;
   align-items: center;
   z-index: 1050; /* higher than other elements */
-}
-
-.passcode-overlay {
-  background: rgba(255, 255, 255, 0.9);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
