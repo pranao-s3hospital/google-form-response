@@ -2,10 +2,10 @@
   <app-header></app-header>
 
   <!-- Passcode screen -->
-  <div *ngIf="!passcodeEntered" class="mt-4 custom-passcode">
+  <div *ngIf="!passcodeEntered" class="container mt-4">
     <input
       type="password"
-      class="form-control w-50 mx-auto mt-3"
+      class="form-control w-50 mx-auto mt-3 custom-passcode"
       placeholder="Enter passcode"
       [(ngModel)]="passcode"
       (keyup)="checkPasscode()"
@@ -14,54 +14,52 @@
 
   <!-- Main app content -->
   <div *ngIf="passcodeEntered" class="container mt-4">
-    <div class="container mt-4">
-      <label for="dateRange" class="form-label custom-label">
-        Select date range for response
-      </label>
-      <select
-        class="form-select custom-input"
-        id="dateRange"
-        (change)="handleDateRangeChange($event)"
-      >
-        <option value="all" selected>All</option>
-        <option value="last month">Last month</option>
-        <option value="last 3 months">Last 3 months</option>
-        <option value="last 6 months">Last 6 months</option>
-        <option value="last year">Last year</option>
-        <option value="custom date range">Custom date range</option>
-      </select>
+    <label for="dateRange" class="form-label custom-label">
+      Select date range for response
+    </label>
+    <select
+      class="form-select custom-input"
+      id="dateRange"
+      (change)="handleDateRangeChange($event)"
+    >
+      <option value="all" selected>All</option>
+      <option value="last month">Last month</option>
+      <option value="last 3 months">Last 3 months</option>
+      <option value="last 6 months">Last 6 months</option>
+      <option value="last year">Last year</option>
+      <option value="custom date range">Custom date range</option>
+    </select>
 
-      <div *ngIf="showCustomDates" class="mt-3">
-        <label for="fromDate" class="form-label custom-label">From</label>
-        <input
-          type="date"
-          class="form-control custom-input"
-          id="fromDate"
-          onkeydown="return false"
-          [min]="minDate"
-          [max]="maxDate"
-          [(ngModel)]="fromDate"
-        />
-        <label for="toDate" class="form-label custom-label mt-2">To</label>
-        <input
-          type="date"
-          class="form-control custom-date"
-          id="toDate"
-          onkeydown="return false"
-          [min]="minDate"
-          [max]="maxDate"
-          [(ngModel)]="toDate"
-        />
-      </div>
-      <div>
-        <button
-          class="btn btn-primary mt-3"
-          (click)="submitDateRange()"
-          [disabled]="showCustomDates && (!fromDate || !toDate)"
-        >
-          Submit
-        </button>
-      </div>
+    <div *ngIf="showCustomDates" class="mt-3">
+      <label for="fromDate" class="form-label custom-label">From</label>
+      <input
+        type="date"
+        class="form-control custom-input"
+        id="fromDate"
+        onkeydown="return false"
+        [min]="minDate"
+        [max]="maxDate"
+        [(ngModel)]="fromDate"
+      />
+      <label for="toDate" class="form-label custom-label mt-2">To</label>
+      <input
+        type="date"
+        class="form-control custom-date"
+        id="toDate"
+        onkeydown="return false"
+        [min]="minDate"
+        [max]="maxDate"
+        [(ngModel)]="toDate"
+      />
+    </div>
+    <div>
+      <button
+        class="btn btn-primary mt-3"
+        (click)="submitDateRange()"
+        [disabled]="showCustomDates && (!fromDate || !toDate)"
+      >
+        Submit
+      </button>
     </div>
   </div>
 
