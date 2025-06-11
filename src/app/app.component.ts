@@ -32,7 +32,7 @@ export class AppComponent {
   toastType: 'success' | 'danger' | 'info' | 'warning' = 'success';
   passcodeEntered = false;
   passcode = '';
-  expectedPasscode = 's3@2024';
+  expectedPasscode = '99425';
 
   checkPasscode() {
     if (this.passcode === this.expectedPasscode) {
