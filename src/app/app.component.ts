@@ -55,7 +55,8 @@ export class AppComponent {
     this.http
       .post(
         'https://google-form-backend-yogp.onrender.com/api/getFeedbackResponse',
-        payload
+        payload,
+        { headers, withCredentials: true }
       )
       .pipe()
       .subscribe({
