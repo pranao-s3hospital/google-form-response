@@ -45,9 +45,11 @@ export class AppComponent {
     const payload = this.showCustomDates
       ? { fromDate: this.fromDate, toDate: this.toDate }
       : { selectValue: this.selectedRange };
-    const username = environment.apiUsername;
-    const password = environment.apiPassword;
-    const basicAuth = 'Basic ' + btoa(username + ':' + password);
+    const basicAuth =
+      'Basic ' +
+      this.fromHex(
+        '63484a68626d46764c584d7a6147397a63476c30595777365a5864765a306c44536e645a574535365a4449356556704453545a4a5130703157564e434d474648526e564a52314a6f5355643462474a35516d745a5745316f53564e4a53325a5262773d3d'
+      );
     const headers = new HttpHeaders({
       Authorization: basicAuth,
     });
@@ -69,6 +71,13 @@ export class AppComponent {
           alert(`Error: ${err.message}`);
         },
       });
+  }
+
+  fromHex(hex: string) {
+    const pairs = hex.match(/.{1,2}/g) || [];
+    return pairs
+      .map((byte) => String.fromCharCode(parseInt(byte, 16)))
+      .join('');
   }
 
   handleDateRangeChange(event: Event) {
