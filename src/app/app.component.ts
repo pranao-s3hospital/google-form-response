@@ -55,16 +55,26 @@ export class AppComponent {
     });
     this.loading = true;
     this.http
-      .post(
+      .post<Blob>(
         'https://google-form-backend-yogp.onrender.com/api/getFeedbackResponse',
         payload,
-        { headers, withCredentials: true }
+        { headers, withCredentials: true, responseType: 'blob' as 'json' }
       )
       .pipe()
       .subscribe({
-        next: (response) => {
+        next: (blob: Blob) => {
           this.loading = false;
-          alert(`Download Successful!`);
+
+          // Create a downloadable link
+          const file = new Blob([blob], { type: 'application/octet-stream' }); // adjust MIME type if known
+          const url = window.URL.createObjectURL(file);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'feedback-report.xlsx'; // Change file name/type as needed
+          a.click();
+          window.URL.revokeObjectURL(url);
+
+          alert('Download Successful!');
         },
         error: (err) => {
           this.loading = false;
