@@ -21,6 +21,14 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Inject environment variables
+        run: |
+          echo "export const environment = {
+            production: true,
+            apiUsername: '${{ secrets.APP_USER_NAME }}',
+            apiPassword: '${{ secrets.APP_USER_PASSWORD }}'
+          };" > src/environments/environment.prod.ts
+
       - name: Build Angular App
         run: npm run build
 

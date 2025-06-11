@@ -2,7 +2,12 @@ import { Component } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { environment } from '../environments/environment';
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpHeaders,
+} from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +26,7 @@ export class AppComponent {
   maxDate = new Date().toISOString().split('T')[0]; // Gets today's date in YYYY-MM-DD format
   fromDate: string = '';
   toDate: string = '';
+  loading: boolean = false;
 
   validateDates() {
     if (this.fromDate && this.toDate && this.fromDate > this.toDate) {
@@ -33,22 +39,45 @@ export class AppComponent {
   }
 
   submitDateRange() {
+    if (this.showCustomDates && this.validateDates()) {
+      return;
+    }
+    const payload = this.showCustomDates
+      ? { fromDate: this.fromDate, toDate: this.toDate }
+      : { selectValue: this.selectedRange };
+    const username = environment.apiUsername;
+    const password = environment.apiPassword;
+    const basicAuth = 'Basic ' + btoa(username + ':' + password);
+    const headers = new HttpHeaders({
+      Authorization: basicAuth,
+    });
+    this.loading = true;
     this.http
-      .post('https://jsonplaceholder.typicode.com/posts', {
-        from: this.fromDate,
-        to: this.toDate,
-      })
+      .post(
+        'https://google-form-backend-yogp.onrender.com/api/getFeedbackResponse',
+        payload
+      )
       .pipe()
       .subscribe({
-        next: (response) =>
-          alert(`POST Successful!! Response: ${JSON.stringify(response)}`),
-        error: (err) => alert(`Error: ${err.message}`),
+        next: (response) => {
+          this.loading = false;
+          alert(`Download Successful!`);
+        },
+        error: (err) => {
+          this.loading = false;
+          alert(`Error: ${err.message}`);
+        },
       });
   }
 
   handleDateRangeChange(event: Event) {
     const selectedValue = (event.target as HTMLSelectElement).value;
     this.selectedRange = selectedValue;
-    this.showCustomDates = selectedValue === 'custom';
+    this.showCustomDates = selectedValue === 'custom date range';
+
+    if (!this.showCustomDates) {
+      this.fromDate = '';
+      this.toDate = '';
+    }
   }
 }
