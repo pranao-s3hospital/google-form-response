@@ -37,9 +37,6 @@ export class AppComponent {
   checkPasscode() {
     if (this.passcode === this.expectedPasscode) {
       this.passcodeEntered = true;
-    } else {
-      this.showToast('Incorrect passcode. Please try again.', 'danger');
-      this.passcode = '';
     }
   }
 

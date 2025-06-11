@@ -2,13 +2,13 @@
   <app-header></app-header>
 
   <!-- Passcode screen -->
-  <div *ngIf="!passcodeEntered" class="mt-5 text-center custom-input">
+  <div *ngIf="!passcodeEntered" class="mt-5 text-center custom-passcode">
     <input
       type="password"
       class="form-control w-50 mx-auto mt-3"
       placeholder="Enter passcode"
       [(ngModel)]="passcode"
-      (onkeyup)="checkPasscode()"
+      (keyup)="checkPasscode()"
     />
   </div>
 
